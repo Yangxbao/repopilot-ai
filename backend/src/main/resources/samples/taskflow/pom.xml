@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 演示数据：仅用于索引与问答体验，不会被构建或执行 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.taskflow</groupId>
+    <artifactId>taskflow</artifactId>
+    <version>0.1.0</version>
+    <name>taskflow</name>
+    <description>任务管理系统（RepoPilot 演示项目）</description>
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
+</project>

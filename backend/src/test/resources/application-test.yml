@@ -1,0 +1,28 @@
+# 测试环境：内存 H2（MySQL 兼容模式）+ Mock AI，独立于本地 MySQL
+spring:
+  datasource:
+    url: jdbc:h2:mem:repopilot_test;MODE=MySQL;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:db/schema-h2.sql
+
+repopilot:
+  jwt:
+    # 测试专用密钥（长度满足 HMAC-SHA256 要求）
+    secret: repopilot-test-secret-0123456789abcdef0123456789abcdef
+    expire-hours: 1
+  ai:
+    provider: mock
+  data-dir: target/test-data
+  qa:
+    top-k: 6
+  agent:
+    max-tool-calls: 8
+
+logging:
+  level:
+    com.repopilot: info

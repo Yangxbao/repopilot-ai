@@ -1,0 +1,27 @@
+# RepoPilot AI 可选的开发环境：只提供 MySQL 8。
+# 用法：docker compose up -d
+# 应用仍按 README 中的方式用 Maven / npm 启动，通过环境变量连接这里的 MySQL。
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: repopilot-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: repopilot_root
+      MYSQL_DATABASE: repopilot
+      MYSQL_USER: repopilot
+      MYSQL_PASSWORD: repopilot
+      TZ: Asia/Shanghai
+    ports:
+      - "3306:3306"
+    volumes:
+      - repopilot-mysql-data:/var/lib/mysql
+      - ./backend/src/main/resources/db/schema-mysql.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "repopilot", "-prepopilot"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  repopilot-mysql-data:

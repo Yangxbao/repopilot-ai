@@ -1,0 +1,67 @@
+spring:
+  application:
+    name: repopilot-ai
+
+  # 默认使用 MySQL。没有 MySQL 时可使用 H2 演示模式启动：
+  #   java -jar repopilot-backend.jar --spring.profiles.active=h2
+  profiles:
+    active: ${REPOPILOT_PROFILE:mysql}
+
+  servlet:
+    multipart:
+      # 上传包大小限制（后端解压时还会做更细粒度的校验）
+      max-file-size: 50MB
+      max-request-size: 55MB
+
+  datasource:
+    # 通过环境变量配置数据库连接，避免把密码写进代码库
+    url: ${REPOPILOT_DB_URL:jdbc:mysql://localhost:3306/repopilot?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true}
+    username: ${REPOPILOT_DB_USERNAME:root}
+    password: ${REPOPILOT_DB_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    banner: false
+    db-config:
+      id-type: auto
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+server:
+  port: 8080
+
+logging:
+  level:
+    com.repopilot: info
+
+repopilot:
+  # JWT 签名密钥：生产环境必须通过环境变量配置足够长的随机字符串。
+  # 不配置时应用会在启动时生成随机开发密钥（重启后所有登录失效，仅用于本地体验）。
+  jwt:
+    secret: ${REPOPILOT_JWT_SECRET:}
+    expire-hours: 72
+  ai:
+    # mock：无需任何 API Key 的演示模式；remote：OpenAI 兼容接口（含 DeepSeek / GLM / 通义等）
+    provider: ${REPOPILOT_AI_PROVIDER:mock}
+    base-url: ${REPOPILOT_AI_BASE_URL:https://api.openai.com/v1}
+    api-key: ${REPOPILOT_AI_API_KEY:}
+    model: ${REPOPILOT_AI_MODEL:gpt-4o-mini}
+    timeout-seconds: 60
+    max-retries: 2
+  upload:
+    # ZIP 与解压内容的硬限制（防止超大文件与压缩炸弹）
+    max-zip-mb: 30
+    max-entries: 5000
+    max-file-kb: 512
+    max-total-mb: 30
+    max-compression-ratio: 500
+  data-dir: ${REPOPILOT_DATA_DIR:./data}
+  qa:
+    top-k: 6
+  agent:
+    max-tool-calls: 8

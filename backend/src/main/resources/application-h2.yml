@@ -1,0 +1,12 @@
+# H2 演示模式：不需要安装 MySQL，启动即用。
+# 数据保存在 ./data/repopilot-h2.mv.db 文件中；建表脚本首次启动时自动执行（幂等）。
+spring:
+  datasource:
+    url: jdbc:h2:file:./data/repopilot-h2;MODE=MySQL;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE;AUTO_SERVER=FALSE
+    username: repopilot
+    password: repopilot
+    driver-class-name: org.h2.Driver
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:db/schema-h2.sql

@@ -1,0 +1,215 @@
+/* RepoPilot 统一设计规范：克制的蓝色主题、清晰的留白、等宽代码字体 */
+
+:root {
+  --rp-primary: #2563eb;
+  --rp-sidebar-bg: #0f172a;
+  --rp-sidebar-text: #94a3b8;
+  --rp-border: #e2e8f0;
+  --rp-bg: #f8fafc;
+  --rp-mono: 'JetBrains Mono', 'Cascadia Code', Consolas, 'Courier New', monospace;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--rp-bg);
+  color: #1e293b;
+}
+
+/* Element Plus 主色对齐 */
+:root {
+  --el-color-primary: var(--rp-primary);
+}
+
+/* 布局 */
+.rp-layout {
+  display: flex;
+  height: 100vh;
+}
+
+.rp-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--rp-sidebar-bg);
+  color: var(--rp-sidebar-text);
+  display: flex;
+  flex-direction: column;
+}
+
+.rp-brand {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 18px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.rp-brand .logo {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: var(--rp-primary);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.rp-menu {
+  flex: 1;
+  border-right: none !important;
+  background: transparent;
+}
+
+.rp-menu .el-menu-item {
+  color: var(--rp-sidebar-text);
+}
+
+.rp-menu .el-menu-item.is-active {
+  color: #fff;
+  background: rgba(37, 99, 235, 0.25);
+  border-right: 2px solid var(--rp-primary);
+}
+
+.rp-header {
+  height: 56px;
+  background: #fff;
+  border-bottom: 1px solid var(--rp-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.rp-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.rp-content {
+  flex: 1;
+  overflow: auto;
+  padding: 20px;
+}
+
+/* 卡片与通用 */
+.rp-card {
+  background: #fff;
+  border: 1px solid var(--rp-border);
+  border-radius: 10px;
+  padding: 18px;
+}
+
+.rp-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rp-stat .value {
+  font-size: 26px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.rp-stat .label {
+  color: #64748b;
+  font-size: 13px;
+}
+
+/* 代码展示 */
+pre.rp-code {
+  font-family: var(--rp-mono);
+  font-size: 12.5px;
+  line-height: 1.55;
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 8px;
+  padding: 14px;
+  overflow: auto;
+  margin: 0;
+  white-space: pre;
+}
+
+code.inline {
+  font-family: var(--rp-mono);
+  background: #eef2ff;
+  color: #3730a3;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 12.5px;
+}
+
+/* AI 回答 markdown */
+.md-body {
+  line-height: 1.7;
+  font-size: 14px;
+  word-break: break-word;
+}
+
+.md-body h1,
+.md-body h2,
+.md-body h3 {
+  font-size: 15px;
+  margin: 14px 0 8px;
+  color: #0f172a;
+}
+
+.md-body pre {
+  font-family: var(--rp-mono);
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+  overflow: auto;
+  font-size: 12.5px;
+}
+
+.md-body code {
+  font-family: var(--rp-mono);
+  background: #eef2ff;
+  border-radius: 4px;
+  padding: 1px 4px;
+  font-size: 12.5px;
+}
+
+.md-body blockquote {
+  margin: 8px 0;
+  padding: 8px 12px;
+  border-left: 3px solid #f59e0b;
+  background: #fffbeb;
+  color: #92400e;
+  border-radius: 0 6px 6px 0;
+}
+
+/* 响应式：窄屏收起侧边栏 */
+@media (max-width: 768px) {
+  .rp-sidebar {
+    position: fixed;
+    z-index: 100;
+    transform: translateX(-100%);
+    transition: transform 0.2s;
+  }
+
+  .rp-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .rp-content {
+    padding: 12px;
+  }
+}
