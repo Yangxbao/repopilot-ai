@@ -232,6 +232,10 @@ BUILD SUCCESS
 
 语义检索（Embedding）→ 混合检索与重排 → 模型驱动的 ReAct 工具循环（复用现有白名单与预算）→ 流式回答 → 代码高亮跳转/在线核对证据 → Git 仓库直接导入。完整列表见 [docs/ROADMAP.md](docs/ROADMAP.md)。
 
+## 📝 开发说明
+
+本项目是本仓库所有者的个人学习项目，在 **AI 辅助**下完成开发：整体设计、编码、测试与文档由所有者主导并与 AI 协作产出，所有功能均经过真实构建、测试与运行验证（见 [docs/TESTING.md](docs/TESTING.md)），未虚构任何结果。欢迎通过 Issue / PR 指出问题。
+
 ## 📄 License
 
 [MIT](LICENSE)
